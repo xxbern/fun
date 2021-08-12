@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -111,41 +113,102 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-
+    var card = Card(
+        color: Colors.blueAccent,
+        //z轴的高度，设置card的阴影
+        elevation: 20.0,
+        //设置shape，这里设置成了R角
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+        ),
+        //对Widget截取的行为，比如这里 Clip.antiAlias 指抗锯齿
+        clipBehavior: Clip.antiAlias,
+        semanticContainer: false,
+        child: Stack(
+          fit: StackFit.expand,
+          // textDirection: TextDirection.ltr,
+          children: [
+            InkWell(
+              onTap: () {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("hello"),
+                  backgroundColor: Colors.blue,
+                ));
+              },
+              child: Image.network(
+                "https://cdn-msp.18comic.art/media/albums/257845_3x4.jpg?v=1628772520",
+                fit: BoxFit.cover,
+              ),
+            ),
+            Positioned(
+              bottom: 10,
+              child: Text(
+                "不可思议的沉默",
+                textWidthBasis: TextWidthBasis.parent,
+                style: TextStyle(
+                    color: Colors.black,
+                    backgroundColor: Colors.white,
+                    fontSize: 13),
+              ),
+            )
+          ],
+        ));
     Widget renderBody() {
       var arr = [
-        Container(
-          color: Colors.pink[200],
-          alignment: Alignment(0, 0),
-          child: Text(
-            _selectedIndex.toString(),
-            style: TextStyle(
-                fontSize: 36, fontWeight: FontWeight.bold, color: Colors.green),
+        GridView(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4,
+            childAspectRatio: 0.7,
           ),
+          children: [card, card, card],
         ),
-        Container(
-          color: Colors.blue[300],
-          alignment: Alignment(0, 0),
-          child: Text(
-            _selectedIndex.toString(),
-            style: TextStyle(
-                fontSize: 36, fontWeight: FontWeight.bold, color: Colors.green),
-          ),
+        GridView(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4,
+              childAspectRatio: 0.7,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 12),
+          children: [
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card,
+            card
+          ],
         ),
-        Container(
-          color: Colors.red[200],
-          alignment: Alignment(0, 0),
-          child: Text(
-            _selectedIndex.toString(),
-            style: TextStyle(
-                fontSize: 36, fontWeight: FontWeight.bold, color: Colors.green),
+        GridView(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4,
+            childAspectRatio: 0.7,
           ),
+          children: [card, card, card, card],
         ),
       ];
       return PageView(
@@ -227,24 +290,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: renderBody(),
-      // Center(
-      //   // Center is a layout widget. It takes a single child and positions it
-      //   // in the middle of the parent.
-      //   child: ListView(
-      //     // Column is also a layout widget. It takes a list of children and
-      //     // arranges them vertically. By default, it sizes itself to fit its
-      //     // children horizontally, and tries to be as tall as its parent.
-      //     //
-      //     // Invoke "debug painting" (press "p" in the console, choose the
-      //     // "Toggle Debug Paint" action from the Flutter Inspector in Android
-      //     // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-      //     // to see the wireframe for each widget.
-      //     //
-      //     // Column has various properties to control how it sizes itself and
-      //     // how it positions its children. Here we use mainAxisAlignment to
-      //     // center the children vertically; the main axis here is the vertical
-      //     // axis because Columns are vertical (the cross axis would be
-      //     // horizontal).
+
       //     children: <Widget>[
       //       Text(
       //         "",
